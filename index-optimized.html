@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wanderlust - Découvrez des destinations extraordinaires à travers le monde. Voyages sur mesure, circuits organisés et expériences uniques.">
+    <meta name="keywords" content="voyage, vacances, destinations, tourisme, aventure, plages, culture">
+    <title>Wanderlust - Voyages d'Exception | Destinations du Monde</title>
+    
+    <!-- Preconnect pour optimiser le chargement des polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Préchargement des polices critiques avec display=swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap"></noscript>
+    
+    <!-- Critical CSS inline pour améliorer le First Contentful Paint -->
+    <style>
+        /* Critical CSS - Above the fold */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Work Sans',sans-serif;color:#1a1a1a;line-height:1.6;overflow-x:hidden}
+        .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+        .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;background:#2c5f4a}
+        .hero-content{position:relative;z-index:2;text-align:center;color:#fff}
+        .logo{display:flex;align-items:center;gap:.5rem;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#2c5f4a}
+    </style>
+    
+    <!-- Stylesheet principal chargé de manière asynchrone -->
+    <link rel="stylesheet" href="styles-optimized.css">
+    
+    <!-- Favicon (optionnel) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon" aria-hidden="true">✈</span>
+                <span class="logo-text">Wanderlust</span>
+            </div>
+            <ul class="nav-menu" id="navMenu" role="menubar">
+                <li role="none"><a href="#accueil" class="nav-link active" role="menuitem">Accueil</a></li>
+                <li role="none"><a href="#destinations" class="nav-link" role="menuitem">Destinations</a></li>
+                <li role="none"><a href="#experiences" class="nav-link" role="menuitem">Expériences</a></li>
+                <li role="none"><a href="#offres" class="nav-link" role="menuitem">Offres</a></li>
+                <li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-search" id="searchBtn" aria-label="Rechercher">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                <button class="btn-primary">Réserver</button>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil" role="banner">
+        <div class="hero-background" aria-hidden="true">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">Découvrez</span>
+                    <span class="title-line">Le Monde</span>
+                </h1>
+                <p class="hero-subtitle">Des destinations extraordinaires vous attendent</p>
+                <div class="hero-cta">
+                    <button class="btn-large btn-primary">Explorer</button>
+                    <button class="btn-large btn-secondary">Voir la vidéo</button>
+                </div>
+            </div>
+            <div class="hero-stats" aria-label="Statistiques">
+                <div class="stat-item">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Destinations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Voyageurs</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9</span>
+                    <span class="stat-label">Note moyenne</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" aria-hidden="true">
+            <span>Défiler</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-bar-container" id="searchContainer">
+        <form class="search-bar" role="search" aria-label="Rechercher un voyage">
+            <div class="search-input-group">
+                <label for="destination">Destination</label>
+                <input type="text" id="destination" placeholder="Où voulez-vous aller?" autocomplete="off">
+            </div>
+            <div class="search-input-group">
+                <label for="depart">Départ</label>
+                <input type="date" id="depart">
+            </div>
+            <div class="search-input-group">
+                <label for="retour">Retour</label>
+                <input type="date" id="retour">
+            </div>
+            <div class="search-input-group">
+                <label for="voyageurs">Voyageurs</label>
+                <select id="voyageurs">
+                    <option>1 personne</option>
+                    <option>2 personnes</option>
+                    <option>3 personnes</option>
+                    <option>4+ personnes</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-search-submit">Rechercher</button>
+        </form>
+    </div>
+
+    <!-- Featured Destinations -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Destinations Populaires</span>
+                <h2 class="section-title">Explorez Nos Destinations</h2>
+                <p class="section-description">Des lieux magiques qui vous laisseront des souvenirs inoubliables</p>
+            </div>
+
+            <div class="destinations-grid">
+                <!-- Destination 1 -->
+                <article class="destination-card large" data-destination="bali">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=75" alt="Plage paradisiaque de Bali avec palmiers" loading="lazy" width="800" height="600">
+                        <div class="destination-overlay">
+                            <button class="btn-icon favorite" aria-label="Ajouter Bali aux favoris">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <div>
+                                <span class="destination-category">Asie</span>
+                                <h3 class="destination-name">Bali, Indonésie</h3>
+                            </div>
+                            <div class="destination-price">
+                                <span class="price-from">À partir de</span>
+                                <span class="price-amount">899€</span>
+                            </div>
+                        </div>
+                        <p class="destination-description">L'île des dieux vous offre plages paradisiaques, temples sacrés et rizières verdoyantes.</p>
+                        <div class="destination-features">
+                            <span class="feature" role="text"><span aria-hidden="true">🏖️</span> Plages</span>
+                            <span class="feature" role="text"><span aria-hidden="true">🛕</span> Temples</span>
+                            <span class="feature" role="text"><span aria-hidden="true">🌾</span> Rizières</span>
+                        </div>
+                        <button class="btn-destination">Découvrir</button>
+                    </div>
+                </article>
+
+                <!-- Destination 2 -->
+                <article class="destination-card" data-destination="santorini">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=600&q=75" alt="Vue sur les maisons blanches et dômes bleus de Santorin" loading="lazy" width="600" height="400">
+                        <div class="destination-overlay">
+                            <button class="btn-icon favorite" aria-label="Ajouter Santorin aux favoris">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <div>
+                                <span class="destination-category">Europe</span>
+                                <h3 class="destination-name">Santorin, Grèce</h3>
+                            </div>
+                            <div class="destination-price">
+                                <span class="price-amount">1299€</span>
+                            </div>
+                        </div>
+                        <p class="destination-description">Maisons blanches, dômes bleus et couchers de soleil époustouflants.</p>
+                        <button class="btn-destination">Découvrir</button>
+                    </div>
+                </article>
+
+                <!-- Destination 3 -->
+                <article class="destination-card" data-destination="maldives">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=75" alt="Bungalows sur pilotis aux Maldives" loading="lazy" width="600" height="400">
+                        <div class="destination-overlay">
+                            <button class="btn-icon favorite" aria-label="Ajouter Maldives aux favoris">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <div>
+                                <span class="destination-category">Océan Indien</span>
+                                <h3 class="destination-name">Maldives</h3>
+                            </div>
+                            <div class="destination-price">
+                                <span class="price-amount">1899€</span>
+                            </div>
+                        </div>
+                        <p class="destination-description">Lagons turquoise, villas sur pilotis et expérience luxueuse.</p>
+                        <button class="btn-destination">Découvrir</button>
+                    </div>
+                </article>
+
+                <!-- Destination 4 -->
+                <article class="destination-card" data-destination="paris">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=75" alt="Tour Eiffel illuminée à Paris" loading="lazy" width="600" height="400">
+                        <div class="destination-overlay">
+                            <button class="btn-icon favorite" aria-label="Ajouter Paris aux favoris">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <div>
+                                <span class="destination-category">Europe</span>
+                                <h3 class="destination-name">Paris, France</h3>
+                            </div>
+                            <div class="destination-price">
+                                <span class="price-amount">599€</span>
+                            </div>
+                        </div>
+                        <p class="destination-description">La ville lumière, capitale mondiale de l'art et de la romance.</p>
+                        <button class="btn-destination">Découvrir</button>
+                    </div>
+                </article>
+
+                <!-- Destination 5 -->
+                <article class="destination-card" data-destination="tokyo">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=75" alt="Skyline moderne de Tokyo" loading="lazy" width="600" height="400">
+                        <div class="destination-overlay">
+                            <button class="btn-icon favorite" aria-label="Ajouter Tokyo aux favoris">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <div>
+                                <span class="destination-category">Asie</span>
+                                <h3 class="destination-name">Tokyo, Japon</h3>
+                            </div>
+                            <div class="destination-price">
+                                <span class="price-amount">1499€</span>
+                            </div>
+                        </div>
+                        <p class="destination-description">Mégalopole futuriste où tradition et modernité se rencontrent.</p>
+                        <button class="btn-destination">Découvrir</button>
+                    </div>
+                </article>
+
+                <!-- Destination 6 -->
+                <article class="destination-card" data-destination="dubai">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=75" alt="Gratte-ciels de Dubaï" loading="lazy" width="600" height="400">
+                        <div class="destination-overlay">
+                            <button class="btn-icon favorite" aria-label="Ajouter Dubaï aux favoris">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <div>
+                                <span class="destination-category">Moyen-Orient</span>
+                                <h3 class="destination-name">Dubaï, EAU</h3>
+                            </div>
+                            <div class="destination-price">
+                                <span class="price-amount">1199€</span>
+                            </div>
+                        </div>
+                        <p class="destination-description">Luxe, gratte-ciels vertigineux et désert à perte de vue.</p>
+                        <button class="btn-destination">Découvrir</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section class="experiences" id="experiences">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Expériences Uniques</span>
+                <h2 class="section-title">Vivez l'Extraordinaire</h2>
+            </div>
+
+            <div class="experiences-grid">
+                <article class="experience-card">
+                    <div class="experience-icon" aria-hidden="true">🏔️</div>
+                    <h3>Aventure</h3>
+                    <p>Randonnées, trekkings et sports extrêmes pour les amateurs de sensations fortes.</p>
+                </article>
+                <article class="experience-card">
+                    <div class="experience-icon" aria-hidden="true">🍷</div>
+                    <h3>Gastronomie</h3>
+                    <p>Découvrez les saveurs du monde avec nos circuits gastronomiques.</p>
+                </article>
+                <article class="experience-card">
+                    <div class="experience-icon" aria-hidden="true">🏛️</div>
+                    <h3>Culture</h3>
+                    <p>Immergez-vous dans l'histoire et les traditions locales.</p>
+                </article>
+                <article class="experience-card">
+                    <div class="experience-icon" aria-hidden="true">🧘</div>
+                    <h3>Bien-être</h3>
+                    <p>Ressourcez-vous avec nos retraites spa et yoga.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="offers" id="offres">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Offres Spéciales</span>
+                <h2 class="section-title">Profitez de Nos Promotions</h2>
+            </div>
+
+            <div class="offers-grid">
+                <article class="offer-card featured">
+                    <div class="offer-badge">-35%</div>
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=75" alt="Paysage de Thaïlande" loading="lazy" width="600" height="400">
+                    </div>
+                    <div class="offer-content">
+                        <h3>Thaïlande - 10 jours</h3>
+                        <p>Bangkok, Chiang Mai et îles paradisiaques</p>
+                        <div class="offer-price">
+                            <span class="old-price">1299€</span>
+                            <span class="new-price">849€</span>
+                        </div>
+                        <button class="btn-primary">Réserver maintenant</button>
+                    </div>
+                </article>
+
+                <article class="offer-card">
+                    <div class="offer-badge">-25%</div>
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=600&q=75" alt="Désert du Maroc" loading="lazy" width="600" height="400">
+                    </div>
+                    <div class="offer-content">
+                        <h3>Maroc - 7 jours</h3>
+                        <p>Marrakech, désert et montagnes</p>
+                        <div class="offer-price">
+                            <span class="old-price">799€</span>
+                            <span class="new-price">599€</span>
+                        </div>
+                        <button class="btn-primary">Réserver maintenant</button>
+                    </div>
+                </article>
+
+                <article class="offer-card">
+                    <div class="offer-badge">-30%</div>
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&q=75" alt="Paysage d'Islande" loading="lazy" width="600" height="400">
+                    </div>
+                    <div class="offer-content">
+                        <h3>Islande - 8 jours</h3>
+                        <p>Aurores boréales et sources chaudes</p>
+                        <div class="offer-price">
+                            <span class="old-price">1599€</span>
+                            <span class="new-price">1119€</span>
+                        </div>
+                        <button class="btn-primary">Réserver maintenant</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Témoignages</span>
+                <h2 class="section-title">Ce Que Disent Nos Voyageurs</h2>
+            </div>
+
+            <div class="testimonials-slider" id="testimonialsSlider" aria-live="polite">
+                <article class="testimonial-card active">
+                    <div class="testimonial-stars" aria-label="5 étoiles sur 5">★★★★★</div>
+                    <p class="testimonial-text">"Une expérience inoubliable à Bali ! L'organisation était parfaite et les guides exceptionnels. Je recommande vivement Wanderlust."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=75" alt="" loading="lazy" width="60" height="60">
+                        <div>
+                            <h4>Sophie Martin</h4>
+                            <p>Voyage à Bali - Août 2024</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="testimonial-card">
+                    <div class="testimonial-stars" aria-label="5 étoiles sur 5">★★★★★</div>
+                    <p class="testimonial-text">"Tokyo était magique ! Chaque détail était pensé et l'accompagnement impeccable. Une découverte culturelle fascinante."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=75" alt="" loading="lazy" width="60" height="60">
+                        <div>
+                            <h4>Thomas Dubois</h4>
+                            <p>Voyage à Tokyo - Octobre 2024</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="testimonial-card">
+                    <div class="testimonial-stars" aria-label="5 étoiles sur 5">★★★★★</div>
+                    <p class="testimonial-text">"Les Maldives dépassaient toutes mes attentes. Le luxe, la tranquillité, et le service 5 étoiles. Un rêve devenu réalité !"</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=75" alt="" loading="lazy" width="60" height="60">
+                        <div>
+                            <h4>Emma Laurent</h4>
+                            <p>Voyage aux Maldives - Septembre 2024</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="slider-controls" role="group" aria-label="Contrôles du slider de témoignages">
+                <button class="slider-btn prev" id="prevBtn" aria-label="Témoignage précédent">←</button>
+                <div class="slider-dots" id="sliderDots" role="tablist">
+                    <button class="dot active" role="tab" aria-selected="true" aria-label="Témoignage 1"></button>
+                    <button class="dot" role="tab" aria-selected="false" aria-label="Témoignage 2"></button>
+                    <button class="dot" role="tab" aria-selected="false" aria-label="Témoignage 3"></button>
+                </div>
+                <button class="slider-btn next" id="nextBtn" aria-label="Témoignage suivant">→</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Restez Informé</h2>
+                <p>Inscrivez-vous pour recevoir nos meilleures offres et inspirations voyage</p>
+                <form class="newsletter-form" id="newsletterForm" aria-label="Inscription à la newsletter">
+                    <label for="newsletter-email" class="visually-hidden">Adresse email</label>
+                    <input type="email" id="newsletter-email" placeholder="Votre adresse email" required autocomplete="email">
+                    <button type="submit" class="btn-primary">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Contactez-Nous</h2>
+                    <p>Notre équipe est à votre disposition pour réaliser le voyage de vos rêves.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-icon" aria-hidden="true">📞</span>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <p><a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon" aria-hidden="true">✉️</span>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:contact@wanderlust.fr">contact@wanderlust.fr</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon" aria-hidden="true">📍</span>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>123 Avenue des Champs-Élysées, Paris</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm" aria-label="Formulaire de contact">
+                    <div class="form-group">
+                        <label for="contact-name" class="visually-hidden">Nom</label>
+                        <input type="text" id="contact-name" placeholder="Votre nom" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email" class="visually-hidden">Email</label>
+                        <input type="email" id="contact-email" placeholder="Votre email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone" class="visually-hidden">Téléphone</label>
+                        <input type="tel" id="contact-phone" placeholder="Votre téléphone" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message" class="visually-hidden">Message</label>
+                        <textarea id="contact-message" placeholder="Votre message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <span class="logo-icon" aria-hidden="true">✈</span>
+                        <span class="logo-text">Wanderlust</span>
+                    </div>
+                    <p>Votre partenaire de confiance pour des voyages exceptionnels depuis 2010.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
+                        <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+                        <a href="#" class="social-link" aria-label="Twitter">Twitter</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Destinations</h4>
+                    <ul>
+                        <li><a href="#">Europe</a></li>
+                        <li><a href="#">Asie</a></li>
+                        <li><a href="#">Amérique</a></li>
+                        <li><a href="#">Afrique</a></li>
+                        <li><a href="#">Océanie</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Voyages sur mesure</a></li>
+                        <li><a href="#">Circuits organisés</a></li>
+                        <li><a href="#">Croisières</a></li>
+                        <li><a href="#">Road trips</a></li>
+                        <li><a href="#">Lune de miel</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Informations</h4>
+                    <ul>
+                        <li><a href="#">À propos</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wanderlust. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Retour en haut de page">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="m18 15-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <!-- JavaScript chargé de manière différée -->
+    <script src="script-optimized.js" defer></script>
+</body>
+</html>
